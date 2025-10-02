@@ -20,26 +20,18 @@ spring:
     database: 6
   jackson:
     default-property-inclusion: non_null # JSON处理时忽略非空字段
-  rabbitmq:
-    host: 192.168.88.128
-    username: haopengmai
-    password: 123456
-    virtual-host: /
-    port: 15672
-    listener:
-      simple:
-        concurrency: 10
-        max-concurrency: 10
-        prefetch: 1
-        auto-startup: true
-        default-requeue-rejected: true
-    template:
-      retry:
-        enabled: true
-        initial-interval: 1000ms
-        max-attempts: 3
-        max-interval: 10000ms
-        multiplier: 1
+  rocketmq:
+    name-server: 192.168.88.128:9876  # RocketMQ NameServer地址
+    producer:
+      group: seckill-producer-group
+      send-message-timeout: 3000
+      retry-times-when-send-failed: 2
+      retry-times-when-send-async-failed: 2
+      max-message-size: 4194304  # 4MB
+    consumer:
+      group: seckill-consumer-group
+      consume-message-batch-max-size: 1
+      consume-timeout: 15000
 mybatis-plus:
   type-aliases-package: com.hmdp.entity # 别名扫描包
 logging:

@@ -11,7 +11,7 @@ import java.util.Properties;
 public class MailUtils {
     public static void main(String[] args) throws MessagingException {
         //可以在这里直接测试方法，填自己的邮箱即可
-        sendtoMail("1274731114@qq.com", new MailUtils().achieveCode());
+        sendtoMail("2243608886@qq.com", new MailUtils().achieveCode());
     }
     //发送email处的代码
     public static void sendtoMail(String email, String code) throws MessagingException {
@@ -19,10 +19,13 @@ public class MailUtils {
         Properties props = new Properties();
         // 表示SMTP发送邮件，必须进行身份验证
         props.put("mail.smtp.auth", "true");
-        //此处填写SMTP服务器
+        // 此处填写SMTP服务器
         props.put("mail.smtp.host", "smtp.qq.com");
-        //端口号，QQ邮箱端口587
+        // 端口号，QQ邮箱端口587
         props.put("mail.smtp.port", "587");
+        // 启用TLS加密（QQ邮箱必需）
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.ssl.protocols", "TLSv1.2");
         // 此处填写，写信人的账号
         props.put("mail.user", "1274731114@qq.com");
         // 此处填写16位STMP口令
